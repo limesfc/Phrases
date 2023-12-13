@@ -20,9 +20,6 @@ class Phrase
     private ?string $translate = null;
 
     #[ORM\Column]
-    private ?bool $isUsed = null;
-
-    #[ORM\Column]
     private ?\DateTimeImmutable $createdAt = null;
 
     #[ORM\Column(nullable: true)]
@@ -53,18 +50,6 @@ class Phrase
     public function setTranslate(string $translate): static
     {
         $this->translate = $translate;
-
-        return $this;
-    }
-
-    public function isIsUsed(): ?bool
-    {
-        return $this->isUsed;
-    }
-
-    public function setIsUsed(bool $isUsed): static
-    {
-        $this->isUsed = $isUsed;
 
         return $this;
     }
