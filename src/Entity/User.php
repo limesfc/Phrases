@@ -7,6 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 #[ORM\Table(name: '`user`')]
+#[ORM\HasLifecycleCallbacks]
 class User
 {
     #[ORM\Id]
@@ -77,5 +78,11 @@ class User
         $this->isAdmin = $isAdmin;
 
         return $this;
+    }
+
+    #[ORM\PrePersist]
+    public function setCreatedAtValue()
+    {
+        $this->createdAt = new \DateTimeImmutable();
     }
 }
