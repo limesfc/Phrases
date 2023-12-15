@@ -6,6 +6,7 @@ use App\Repository\PhraseRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PhraseRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Phrase
 {
     #[ORM\Id]
@@ -76,5 +77,11 @@ class Phrase
         $this->sentAt = $sentAt;
 
         return $this;
+    }
+
+    #[ORM\PrePersist]
+    public function setCreatedAtValue()
+    {
+        $this->createdAt = new \DateTimeImmutable();
     }
 }
