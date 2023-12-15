@@ -24,8 +24,12 @@ class PhrasesController extends AbstractController
         $form = $this->createForm(SignUpType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
+            $user->setIsActive(true);
+            $user->setIsAdmin(false);
             $this->entityManager->persist($user);
             $this->entityManager->flush();
+
+            return $this->redirectToRoute('phrases_signup');
         }
 
         return $this->render('phrases/index.html.twig', [
