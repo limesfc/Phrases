@@ -25,7 +25,6 @@ class PhrasesController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $user->setIsActive(true);
-            $user->setIsAdmin(false);
             $this->entityManager->persist($user);
             $this->entityManager->flush();
 

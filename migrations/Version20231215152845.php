@@ -21,7 +21,7 @@ final class Version20231215152845 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE "user" ADD roles JSON NOT NULL');
-        $this->addSql('ALTER TABLE "user" ADD password VARCHAR(255) NOT NULL');
+        $this->addSql('ALTER TABLE "user" ADD password VARCHAR(255)');
         $this->addSql('ALTER TABLE "user" DROP is_admin');
         $this->addSql('ALTER TABLE "user" ALTER email TYPE VARCHAR(180)');
     }
@@ -29,8 +29,8 @@ final class Version20231215152845 extends AbstractMigration
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('CREATE SCHEMA public');
-        $this->addSql('ALTER TABLE "user" ADD is_admin BOOLEAN NOT NULL');
+        // $this->addSql('CREATE SCHEMA public');
+        // $this->addSql('ALTER TABLE "user" ADD is_admin BOOLEAN NOT NULL');
         $this->addSql('ALTER TABLE "user" DROP roles');
         $this->addSql('ALTER TABLE "user" DROP password');
         $this->addSql('ALTER TABLE "user" ALTER email TYPE VARCHAR(255)');
