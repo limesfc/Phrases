@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Tests\Controller;
+namespace App\Tests\Functional;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class PhrasesControllerTest extends WebTestCase
 {
-    public function testSomething(): void
+    public function testRenderSignUpLandingPage(): void
     {
         $client = static::createClient();
         $crawler = $client->request('GET', '/');
 
         $this->assertResponseIsSuccessful();
-        $this->assertSelectorTextContains('h1', 'Hello World');
+        $this->assertSelectorTextContains('h1', 'Sign Up for learn English phrases');
     }
 }
