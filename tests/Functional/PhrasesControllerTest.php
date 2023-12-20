@@ -50,4 +50,24 @@ class PhrasesControllerTest extends WebTestCase
         $this->assertSelectorNotExists('li:contains("This value is already used.")');
         $this->assertEquals($countOfUsers + 1, $this->entityManager->getRepository(User::class)->count([]));
     }
+
+    public function testSignUpWhenEmailExistInDataBase()
+    {
+        $countOfUsers = $this->entityManager
+            ->getRepository(User::class)
+            ->count([]);
+
+        $this->client->request('GET', '/');
+
+        $this->assertResponseIsSuccessful();
+
+        $this->client->submitForm('sign_up_submit', [
+            'sign_up[email]' => 'user@test.com',
+        ]);
+
+        $this->assertResponseStatusCodeSame(422);
+        $this->assertSelectorTextContains('h1', 'Sign Up for learn English phrases');
+        $this->assertSelectorExists('li:contains("This value is already used.")');
+        $this->assertEquals($countOfUsers, $this->entityManager->getRepository(User::class)->count([]));
+    }
 }
